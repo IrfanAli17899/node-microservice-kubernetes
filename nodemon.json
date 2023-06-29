@@ -1,0 +1,5 @@
+{
+    "watch": ["apps", "libs"],
+    "ext": "ts",
+    "exec": "npm run build && node ./scripts/dev-start.js"
+  }
