@@ -1,0 +1,71 @@
+version: '3'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - APP=api
+    ports:
+      - 3000:3000
+    environment:
+      - APP=api
+      - USER_SERVICE_URL=http://user:3001
+      - TODO_SERVICE_URL=http://todo:3002
+    env_file:
+      - .env
+    networks:
+      - app_network
+    depends_on:
+      - db
+      - user
+      - todo
+  user:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - APP=user
+    ports:
+      - 3001:3001
+    environment:
+      - APP=user
+    env_file:
+      - .env
+    networks:
+      - app_network
+    depends_on:
+      - db
+  todo:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - APP=todo
+    ports:
+      - 3002:3002
+    environment:
+      - APP=todo
+    env_file:
+      - .env
+    networks:
+      - app_network
+    depends_on:
+      - db
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=1234
+    env_file: 
+      - .env
+    networks:
+      - app_network
+volumes:
+  db_data:
+    driver: local
+networks:
+  app_network:
+        
