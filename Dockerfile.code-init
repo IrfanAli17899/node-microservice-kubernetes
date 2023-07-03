@@ -1,0 +1,4 @@
+FROM node:16-alpine as code-init
+WORKDIR /app
+COPY . .
+RUN npm ci

@@ -2,11 +2,11 @@
 ARG APP
 ARG APP_WORKING_DIR="/app/apps/${APP}"
 
-FROM node:16-alpine as builder
+FROM code-init as builder
 ARG APP_WORKING_DIR
-WORKDIR /app
-COPY . .
-RUN npm ci
+# WORKDIR /app
+# COPY . .
+# RUN npm ci
 WORKDIR $APP_WORKING_DIR
 RUN npm run build 
 

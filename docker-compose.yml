@@ -1,6 +1,12 @@
 version: '3'
 services:
+  code-init:
+    image: code-init
+    build: 
+      context: .
+      dockerfile: ./Dockerfile.code-init
   api:
+    image: api
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -21,6 +27,7 @@ services:
       - user
       - todo
   user:
+    image: user
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -37,6 +44,7 @@ services:
     depends_on:
       - db
   todo:
+    image: todo
     build:
       context: .
       dockerfile: ./Dockerfile
