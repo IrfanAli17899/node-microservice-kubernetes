@@ -1,4 +1,5 @@
-FROM node:16-alpine as code-init
+FROM alpine as code-init
+RUN apk add --update nodejs npm
 WORKDIR /app
 COPY . .
 RUN npm ci

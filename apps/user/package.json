@@ -1,13 +1,15 @@
 {
-    "scripts": {
-      "build":"tsc --build"  
-    },
-    "dependencies": {
-        "bcrypt": "^5.1.0",
-        "express": "^4.18.2",
-        "joi": "^17.9.2",
-        "jsonwebtoken": "^9.0.0",
-        "module-alias": "^2.2.3",
-        "sequelize-typescript": "^2.1.5"
-    }
+  "name": "@apps/user",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "express": "^4.18.2",
+    "joi": "^17.9.2",
+    "jsonwebtoken": "^9.0.0",
+    "module-alias": "^2.2.3",
+    "sequelize-typescript": "^2.1.5"
+  }
 }

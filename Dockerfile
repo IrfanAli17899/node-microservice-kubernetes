@@ -4,13 +4,12 @@ ARG APP_WORKING_DIR="/app/apps/${APP}"
 
 FROM code-init as builder
 ARG APP_WORKING_DIR
-# WORKDIR /app
-# COPY . .
-# RUN npm ci
 WORKDIR $APP_WORKING_DIR
 RUN npm run build 
 
-FROM node:16-alpine as runner
+FROM alpine as runner
+RUN apk add --update nodejs npm
+
 WORKDIR /app
 ENV APP=""
 ARG APP_WORKING_DIR
