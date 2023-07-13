@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-server-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user-server-pod
+  template:
+    metadata:
+      labels:
+        app: user-server-pod
+    spec:
+      containers:
+      - name: user-server-container
+        image: user
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: APP
+            value: user
+          - name:  DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name:  postgres-db-secret
+                key:  POSTGRES_PASSWORD
+        envFrom:
+          - configMapRef:
+              name: user-configmap
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3001
